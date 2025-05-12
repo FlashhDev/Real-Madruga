@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Madruga - Site Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        /* Cores do Time */
+        :root {
+            --primary: #1a3e8c;
+            --secondary: #f8c300;
+            --accent: #e63946;
+            --light: #f1faee;
+            --dark: #1d3557;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Header - Background em tela cheia */
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('Design sem nome (5).png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo {
+            max-width: 300px;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+            animation: slideUp 1s ease-out;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        
+        .nav-tab {
+            padding: 12px 25px;
+            background-color: var(--secondary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .nav-tab:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Páginas */
+        .page {
+            display: none;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .page-title {
+            font-family: 'Oswald', sans-serif;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .page-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto;
+        }
+        
+        /* Página Wallpaper */
+        .wallpaper-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .wallpaper-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .wallpaper-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .wallpaper-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        /* Página Sobre */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text {
+            line-height: 1.6;
+        }
+        
+        /* Página Contato */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 62, 140, 0.2);
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Página Jogos */
+        .games-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .game-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .games-list {
+            margin-top: 40px;
+        }
+        
+        .game-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .game-card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .game-result {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .game-date {
+            color: #666;
+        }
+        
+        .game-opponent {
+            margin-bottom: 5px;
+        }
+        
+        .game-notes {
+            font-style: italic;
+            color: #555;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #ddd;
+        }
+        
+        .game-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .history-section {
+            margin-top: 50px;
+        }
+        
+        .history-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 3px solid #ccc;
+        }
+        
+        .history-item.deleted {
+            border-left-color: var(--accent);
+        }
+        
+        /* Página Parceiros */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .partner-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .partner-logo {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+        
+        .partner-name {
+            font-weight: bold;
+            color: var(--primary);
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .games-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .logo {
+                max-width: 200px;
+            }
+            
+            .partners-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <img src="logo real.png" alt="Logo do Time" class="logo">
+        <h1>Real Madruga</h1>
+        <p>#OsMadrugaPkrlh</p>
+        
+        <div class="nav-tabs">
+            <a href="#" class="nav-tab" id="about-tab">Sobre</a>
+            <a href="#" class="nav-tab" id="contact-tab">Agendar Jogo</a>
+            <a href="#" class="nav-tab" id="games-tab">Jogos</a>
+            <a href="#" class="nav-tab" id="partners-tab">Parceiros</a>
+            <a href="#" class="nav-tab" id="wallpaper-tab">Wallpapers</a>
+
+        </div>
+    </header>
+    
+    <!-- Página Wallpapers -->
+    <section class="page" id="wallpaper-page">
+        <h2 class="page-title">Wallpapers do Time</h2>
+        <div class="wallpaper-grid">
+            <div class="wallpaper-item">
+                <img src="1.png" alt="Wallpaper 1">
+            </div>
+            <div class="wallpaper-item">
+                <img src="2.png" alt="Wallpaper 2">
+            </div>
+            <div class="wallpaper-item">
+                <img src="3.png" alt="Wallpaper 3">
+            </div>
+            <div class="wallpaper-item">
+                <img src="4.png" alt="Wallpaper 4">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Página Sobre -->
+    <section class="page" id="about-page">
+        <h2 class="page-title">Sobre o Time</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="Madruga-VS-Grota-City.png" alt="Foto do Time">
+            </div>
+            <div class="about-text">
+                </p>Fundado em 2025, os Madruga surgiu com intuito de não ser apenas um time mais ser um dos melhores e maiores de Betim e região. 🇧R</p>
+                <p>Nossa filosofia é baseada em respeito, disciplina e amor pelo esporte.
+                    Acreditamos que o futebol vai além do campo, hoje não somos apenas um time mas também somos família, com um elenco super unido.</p>
+                <p>Atualmente contamos com 15 jogadores dedicamos e uma comissão técnica comprometida com o desenvolvimento continuo da equipe.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Página Contato -->
+    <section class="page" id="contact-page">
+        <h2 class="page-title">Agendar Jogo</h2>
+        <div class="contact-form">
+            <form id="schedule-form">
+                <div class="form-group">
+                    <label for="contact-name">Nome do Responsável</label>
+                    <input type="text" id="contact-name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-phone">Telefone</label>
+                    <input type="tel" id="contact-phone" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="team-name">Nome do Time</label>
+                    <input type="text" id="team-name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="game-date">Data Pretendida</label>
+                    <input type="date" id="game-date" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="game-location">Local</label>
+                    <input type="text" id="game-location" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-message">Mensagem</label>
+                    <textarea id="contact-message" class="form-control" rows="4"></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Enviar Solicitação</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Página Jogos -->
+    <section class="page" id="games-page">
+        <h2 class="page-title">Jogos Amistosos</h2>
+        
+        <div class="games-container">
+            <div class="game-form">
+                <h3>Adicionar Jogo</h3>
+                <form id="game-form">
+                    <div class="form-group">
+                        <label for="opponent">Adversário</label>
+                        <input type="text" id="opponent" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="game-date">Data</label>
+                        <input type="date" id="game-date" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="result">Resultado</label>
+                        <input type="text" id="result" class="form-control" placeholder="Ex: 3x1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="game-notes">Observações</label>
+                        <textarea id="game-notes" class="form-control" rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn">Salvar Jogo</button>
+                </form>
+            </div>
+            
+            <div>
+                <div class="games-list" id="games-list">
+                    <!-- Jogos serão adicionados aqui pelo JavaScript -->
+                </div>
+                
+                <div class="history-section">
+                    <h3>Histórico de Alterações</h3>
+                    <div id="history-container">
+                        <!-- Histórico será adicionado aqui pelo JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Página Parceiros -->
+    <section class="page" id="partners-page">
+        <h2 class="page-title">Nossos Parceiros</h2>
+        <div class="partners-grid">
+            <div class="partner-card">
+                <img src="Gold Black Minimalist Beauty Salon Logo (2).png" alt="WavesStudio" class="partner-logo">
+                <div class="partner-name">WavesStudio</div>
+            </div>
+            <div class="partner-card">
+                <img src="salost.png" alt="Salost" class="partner-logo">
+                <div class="partner-name">Salost</div>
+            </div>
+            <div class="partner-card">
+                <img src="Gold Black Minimalist Beauty Salon Logo.png" alt="Tiago Santana" class="partner-logo">
+                <div class="partner-name">Tiago Santana</div>
+            </div>
+            <div class="partner-card">
+                <img src="Gold Black Minimalist Beauty Salon Logo (1).png" alt="Bola da Vez" class="partner-logo">
+                <div class="partner-name">Bola da Vez</div>
+            </div>
+            <div class="partner-card">
+                <img src="IMG_9525.JPG" alt="Bhz Fibra" class="partner-logo">
+                <div class="partner-name">Bhz Fibra</div>
+            </div>
+            <div class="partner-card">
+                <img src="IMG_9948.JPG" alt="Ms do Corte" class="partner-logo">
+                <div class="partner-name">Ms do Corte</div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Dados
+        let games = [
+            {
+                id: 1,
+                opponent: "Time Alpha",
+                date: "2023-06-15",
+                result: "2x1",
+                notes: "Gols de João e Pedro"
+            },
+            {
+                id: 2,
+                opponent: "Time Beta",
+                date: "2023-06-22",
+                result: "3x0",
+                notes: "Hat-trick de Carlos"
+            }
+        ];
+        
+        let history = [
+            {
+                id: 1,
+                action: "deleted",
+                game: {
+                    opponent: "Time Gama",
+                    date: "2023-05-30",
+                    result: "1x1"
+                },
+                timestamp: "2023-06-01T14:30:00"
+            }
+        ];
+        
+        // Elementos DOM
+        const header = document.getElementById('header');
+        const pages = document.querySelectorAll('.page');
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const gamesList = document.getElementById('games-list');
+        const historyContainer = document.getElementById('history-container');
+        const gameForm = document.getElementById('game-form');
+        
+        // Navegação
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.id.replace('-tab', '-page');
+                
+                // Esconde todas as páginas e mostra a selecionada
+                pages.forEach(page => page.style.display = 'none');
+                document.getElementById(pageId).style.display = 'block';
+                
+                // Scroll para o topo
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Se for a página de jogos, renderiza os dados
+                if (pageId === 'games-page') {
+                    renderGames();
+                    renderHistory();
+                }
+            });
+        });
+        
+        // Formulário de Jogos
+        gameForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newGame = {
+                id: Date.now(),
+                opponent: document.getElementById('opponent').value,
+                date: document.getElementById('game-date').value,
+                result: document.getElementById('result').value,
+                notes: document.getElementById('game-notes').value
+            };
+            
+            games.push(newGame);
+            renderGames();
+            gameForm.reset();
+            
+            alert('Jogo adicionado com sucesso!');
+        });
+        
+        // Renderiza a lista de jogos
+        function renderGames() {
+            gamesList.innerHTML = '';
+            
+            games.forEach(game => {
+                const gameCard = document.createElement('div');
+                gameCard.className = 'game-card';
+                gameCard.innerHTML = `
+                    <div class="game-card-header">
+                        <span class="game-result">${game.result}</span>
+                        <span class="game-date">${formatDate(game.date)}</span>
+                    </div>
+                    <div class="game-opponent">
+                        <strong>Adversário:</strong> ${game.opponent}
+                    </div>
+                    ${game.notes ? `<div class="game-notes"><strong>Observações:</strong> ${game.notes}</div>` : ''}
+                    <div class="game-actions">
+                        <button class="btn btn-edit" data-id="${game.id}">Editar</button>
+                        <button class="btn btn-delete" data-id="${game.id}">Excluir</button>
+                    </div>
+                `;
+                
+                gamesList.appendChild(gameCard);
+            });
+            
+            // Adiciona event listeners aos botões
+            document.querySelectorAll('.btn-edit').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const gameId = parseInt(this.getAttribute('data-id'));
+                    editGame(gameId);
+                });
+            });
+            
+            document.querySelectorAll('.btn-delete').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const gameId = parseInt(this.getAttribute('data-id'));
+                    deleteGame(gameId);
+                });
+            });
+        }
+        
+        // Renderiza o histórico
+        function renderHistory() {
+            historyContainer.innerHTML = '';
+            
+            history.forEach(item => {
+                const historyItem = document.createElement('div');
+                historyItem.className = `history-item ${item.action}`;
+                
+                let actionText = '';
+                if (item.action === 'deleted') {
+                    actionText = `Jogo excluído: ${item.game.opponent} em ${formatDate(item.game.date)} (${item.game.result})`;
+                }
+                
+                historyItem.textContent = `${formatDateTime(item.timestamp)} - ${actionText}`;
+                historyContainer.appendChild(historyItem);
+            });
+        }
+        
+        // Editar jogo
+        function editGame(id) {
+            const game = games.find(g => g.id === id);
+            if (game) {
+                document.getElementById('opponent').value = game.opponent;
+                document.getElementById('game-date').value = game.date;
+                document.getElementById('result').value = game.result;
+                document.getElementById('game-notes').value = game.notes;
+                
+                // Remove o jogo antigo
+                games = games.filter(g => g.id !== id);
+                
+                // Scroll para o formulário
+                document.querySelector('.game-form').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Excluir jogo
+        function deleteGame(id) {
+            if (confirm('Tem certeza que deseja excluir este jogo?')) {
+                const deletedGame = games.find(g => g.id === id);
+                if (deletedGame) {
+                    // Adiciona ao histórico
+                    history.push({
+                        id: Date.now(),
+                        action: "deleted",
+                        game: deletedGame,
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    // Remove da lista
+                    games = games.filter(g => g.id !== id);
+                    
+                    renderGames();
+                    renderHistory();
+                }
+            }
+        }
+        
+        // Funções auxiliares
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('pt-BR');
+        }
+        
+        function formatDateTime(dateTimeStr) {
+            const date = new Date(dateTimeStr);
+            return date.toLocaleString('pt-BR');
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostra a página inicial (wallpapers)
+            document.getElementById('wallpaper-page').style.display = 'block';
+            
+            // Configura a data mínima para o campo de data
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('game-date').min = today;
+            document.getElementById('game-date').value = today;
+        });
+    </script>
+</body>
+</html>
